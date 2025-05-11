@@ -16,10 +16,13 @@ const subscribe = (callback: () => void): (() => void) => {
   };
 };
 
+const getServerSnapshot = () => "{}";
+
 export const useFavouriteStore = () => {
   const serializedFavourites = useSyncExternalStore(
     subscribe,
     getFavouritesFromLocalStorage,
+    getServerSnapshot,
   );
   const favourites: StoredType = JSON.parse(serializedFavourites);
 
