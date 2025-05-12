@@ -1,6 +1,5 @@
 import { getImageUrl, getShowDetails } from "@/tmbd-client";
 import { unstable_ViewTransition as ViewTransition } from "react";
-import { Breadcrumbs } from "@/app/components/breadcrumbs";
 import { FavouriteButton } from "./add-favourite-button";
 
 const DetailsPage = async ({
@@ -10,17 +9,9 @@ const DetailsPage = async ({
 }) => {
   const { id } = await params;
   const showData = await getShowDetails(parseInt(id as string));
-  const breadcrumbs = [
-    { title: "Home", url: "/" },
-    { title: "Find Shows", url: "/find/" },
-    { title: showData.name || "", url: "#" },
-  ];
 
   return (
     <div>
-      <div>
-        <Breadcrumbs breadcrumbs={breadcrumbs} />
-      </div>
       {showData.backdrop_path ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img

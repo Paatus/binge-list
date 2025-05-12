@@ -2,28 +2,25 @@
 
 import { useFavouriteStore } from "./hooks/use-favourite-store";
 import { ShowCard } from "./components/show-card";
-import { WiStars } from "react-icons/wi";
 import Link from "next/link";
-import { FaMagnifyingGlass } from "react-icons/fa6";
+import { Button } from "@/components/ui/button";
+import { Search, StarOff } from "lucide-react";
 
 const Page = () => {
   return (
-    <div className="pt-10">
+    <div className="h-full">
       <div className="flex justify-between py-2">
         <h1 className="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">
           Favourites
         </h1>
         <Link href="/find">
-          <button
-            type="button"
-            className="cursor-pointer gap-1 inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            <FaMagnifyingGlass />
+          <Button>
+            <Search />
             Find shows
-          </button>
+          </Button>
         </Link>
       </div>
-      <div className="max-sm:w-full sm:flex-1">
+      <div className="max-sm:w-full sm:flex-1 h-full ">
         <FavouritesArea />
       </div>
     </div>
@@ -35,25 +32,22 @@ const FavouritesArea = () => {
 
   if (!favourites.length) {
     return (
-      <div className="text-center">
-        <div className="justify-center flex">
-          <WiStars className="text-[200px]" />
+      <div className="text-center h-full">
+        <div className="justify-center items-center flex h-full">
+          <StarOff className="size-32" />
         </div>
-        <h3 className="mt-2 text-sm font-semibold text-gray-900 dark:text-white">
-          No projects
+        <h3 className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">
+          No favourites, yet
         </h3>
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-gray-500">
           Get started by marking your favourite shows as favourites
         </p>
         <div className="mt-6">
           <Link href="/find">
-            <button
-              type="button"
-              className="cursor-pointer gap-1 inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              <FaMagnifyingGlass />
+            <Button>
+              <Search />
               Find shows
-            </button>
+            </Button>
           </Link>
         </div>
       </div>
@@ -61,7 +55,7 @@ const FavouritesArea = () => {
   }
 
   return (
-    <div className={`gap-2 grid grid-cols-2`}>
+    <div className={`gap-2 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4`}>
       {favourites?.map((favourite) => (
         <ShowCard show={favourite} key={favourite.id} />
       ))}
