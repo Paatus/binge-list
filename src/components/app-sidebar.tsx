@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { Search, Star } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
@@ -12,16 +11,15 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { usePathname } from "next/navigation";
+import { ComponentProps } from "react";
+import { useSession } from "next-auth/react";
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
+  const session = useSession();
 
   const data = {
-    user: {
-      name: "shadcn",
-      email: "m@example.com",
-      avatar: "/avatars/shadcn.jpg",
-    },
+    user: session.data?.user,
     navMain: [
       {
         title: "Favourites",

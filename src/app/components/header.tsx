@@ -26,7 +26,7 @@ export const Header = () => {
     <div>
       <div className="max-sm:w-full sm:flex-1">
         <h1 className="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">
-          Events
+          Shows
         </h1>
         <div className="mt-4 flex gap-4">
           <div className="flex-1 pb-2">
