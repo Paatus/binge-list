@@ -1,7 +1,7 @@
 "use client";
 
-import { useFavouriteStore } from "./hooks/use-favourite-store";
-import { ShowCard } from "./components/show-card";
+import { useFavouriteStore } from "@/hooks/use-favourite-store";
+import { ShowCard } from "@/components/show-card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Search, StarOff } from "lucide-react";

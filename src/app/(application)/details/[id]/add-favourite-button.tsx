@@ -1,7 +1,7 @@
 "use client";
 
 import type { TvShowListing } from "@/app/types";
-import { useFavouriteStore } from "@/app/hooks/use-favourite-store";
+import { useFavouriteStore } from "@/hooks/use-favourite-store";
 import { Button } from "@/components/ui/button";
 
 interface Props {

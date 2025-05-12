@@ -1,6 +1,6 @@
 import { searchShows } from "@/tmbd-client";
-import { Header } from "../components/header";
-import { ShowCard } from "../components/show-card";
+import { Header } from "@/components/header";
+import { ShowCard } from "@/components/show-card";
 
 const Home = async ({
   searchParams,

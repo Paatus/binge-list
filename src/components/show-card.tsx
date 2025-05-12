@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { unstable_ViewTransition as ViewTransition } from "react";
-import { TvShowListing } from "../types";
 import { useFavouriteStore } from "../hooks/use-favourite-store";
 import {
   Card,
@@ -12,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
+import { TvShowListing } from "@/app/types";
 
 interface Props {
   show: TvShowListing;

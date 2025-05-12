@@ -1,5 +1,5 @@
+import { TvShowListing } from "@/app/types";
 import { useSyncExternalStore } from "react";
-import { TvShowListing } from "../types";
 
 const STORAGE_KEY = "binge-list-favourites";
 
