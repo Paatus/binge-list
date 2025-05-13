@@ -1,4 +1,4 @@
-import { getImageUrl, getShowDetails } from "@/tmbd-client";
+import { getImageUrl } from "@/tmbd-client";
 import {
   cache,
   Suspense,
@@ -9,6 +9,7 @@ import { isFavourite } from "@/actions/favourites";
 import { TvShowDetails } from "@/app/types";
 import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
+import { getShowDetails } from "@/actions/shows";
 
 const cachedShowDetails = cache(getShowDetails);
 

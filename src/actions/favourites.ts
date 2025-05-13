@@ -3,11 +3,12 @@
 import { TvShowListing } from "@/app/types";
 import { auth } from "@/auth";
 import { favourites, users } from "@/schema";
-import { getShowDetails } from "@/tmbd-client";
 import { and, eq } from "drizzle-orm";
 import { PgInsertValue } from "drizzle-orm/pg-core";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
+import { getShowDetails } from "./shows";
+
 const connectionString = process.env.DATABASE_URL;
 // Disable prefetch as it is not supported for "Transaction" pool mode
 const client = postgres(connectionString || "", { prepare: false });
@@ -39,21 +40,15 @@ export const toggleFavourite = async (showId: number) => {
     .where(and(eq(favourites.userId, userId), eq(favourites.showId, showId)));
   if (favouriteResults.length) {
     deleteFavourite({ showId, userId });
-    // revalidatePath("/");
-    // revalidatePath("/find");
-    // revalidatePath(`/details/${showId}`);
     return;
   }
   addFavourite({ showId, userId });
-  // revalidatePath("/");
-  // revalidatePath("/find");
-  // revalidatePath(`/details/${showId}`);
-  return;
 };
 
 const addFavourite = async (values: PgInsertValue<typeof favourites>) => {
   await db.insert(favourites).values(values);
 };
+
 const deleteFavourite = async ({
   showId,
   userId,
