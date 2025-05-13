@@ -34,7 +34,7 @@ export const FavouriteButton = ({ show, isFavourite }: Props) => {
       className="shrink-0 -mr-2"
       variant={"ghost"}
       size={"icon"}
-      onClick={toggle(show)}
+      onClick={void toggle(show)}
       disabled={isPending}
     >
       <Icon isFavourite={isFavourite} isPending={isPending} />

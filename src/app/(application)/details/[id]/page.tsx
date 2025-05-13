@@ -44,23 +44,23 @@ const DetailsPage = async ({
       ) : null}
       <ViewTransition name={`title-${showData.id}`}>
         <h1 className="mt-10 text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-7xl dark:text-white">
-          {showData?.name}
+          {showData.name}
         </h1>
       </ViewTransition>
       <h2 className="text-xl tracking-tight text-pretty text-gray-700 mb-4">
-        {showData?.tagline}
+        {showData.tagline}
       </h2>
       <div className="gap-2 flex">
         <span className="text-sm font-medium text-gray-500">
-          {showData?.genres?.map((g) => g.name).join(" / ")}
+          {showData.genres?.map((g) => g.name).join(" / ")}
         </span>
         <span className="text-sm font-medium text-gray-500">|</span>
         <span className="text-sm font-medium text-gray-500">
-          {showData?.number_of_seasons} Seasons
+          {showData.number_of_seasons} Seasons
         </span>
         <span className="text-sm font-medium text-gray-500">|</span>
         <span className="text-sm font-medium text-gray-500">
-          {showData?.status}
+          {showData.status}
         </span>
       </div>
 

@@ -96,7 +96,7 @@ export function NavUser({ user }: { user: Session["user"] }) {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />*/}
-            <DropdownMenuItem onClick={() => signOut({ redirectTo: "/" })}>
+            <DropdownMenuItem onClick={() => void signOut({ redirectTo: "/" })}>
               <LogOut />
               Log out
             </DropdownMenuItem>

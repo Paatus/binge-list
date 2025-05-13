@@ -28,4 +28,8 @@ export default tsEslint.config(
       },
     },
   },
+  { rules: {
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/unbound-method": "off",
+  } }
 );

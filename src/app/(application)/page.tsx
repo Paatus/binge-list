@@ -58,7 +58,7 @@ const FavouritesArea = async () => {
 
   return (
     <div className={`gap-2 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3`}>
-      {favourites?.map((favourite) => (
+      {favourites.map((favourite) => (
         <ShowCard show={favourite} isFavourite={true} key={favourite.id} />
       ))}
     </div>

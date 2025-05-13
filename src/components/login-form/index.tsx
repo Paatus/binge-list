@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { GoogleButton } from "./google-button";
 
-export const LoginForm = async ({
+export const LoginForm = ({
   className,
   ...props
 }: React.ComponentProps<"div">) => {

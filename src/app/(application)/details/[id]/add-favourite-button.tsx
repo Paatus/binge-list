@@ -31,7 +31,7 @@ export const FavouriteButton = ({ show, isFavourite }: Props) => {
   const [toggle, isPending] = useToggleFavourite();
 
   return (
-    <Button disabled={isPending} onClick={toggle(show)}>
+    <Button disabled={isPending} onClick={() => toggle(show)}>
       <ButtonContents isFavourite={isFavourite} isPending={isPending} />
     </Button>
   );

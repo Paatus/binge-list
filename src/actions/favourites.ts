@@ -39,10 +39,10 @@ export const toggleFavourite = async (showId: number) => {
     .from(favourites)
     .where(and(eq(favourites.userId, userId), eq(favourites.showId, showId)));
   if (favouriteResults.length) {
-    deleteFavourite({ showId, userId });
+    await deleteFavourite({ showId, userId });
     return;
   }
-  addFavourite({ showId, userId });
+  await addFavourite({ showId, userId });
 };
 
 const addFavourite = async (values: PgInsertValue<typeof favourites>) => {

@@ -1,8 +1,8 @@
 import { getFavourites } from "@/actions/favourites";
+import { searchShows } from "@/actions/shows";
 import { TvShowListing } from "@/app/types";
 import { Header } from "@/components/header";
 import { ShowCard } from "@/components/show-card";
-import { searchShows } from "@/tmbd-client";
 import { ScanSearch } from "lucide-react";
 
 interface ResultsAreaProps {
@@ -54,7 +54,7 @@ const Home = async ({
   const searchTerm = (params.searchTerm || "") as string;
   const searchResults = await searchShows(searchTerm);
 
-  const shows = searchResults?.results;
+  const shows = searchResults.results;
 
   return (
     <div className="max-sm:w-full sm:flex-1">
