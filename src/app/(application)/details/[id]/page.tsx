@@ -1,6 +1,7 @@
 import { getImageUrl, getShowDetails } from "@/tmbd-client";
 import { unstable_ViewTransition as ViewTransition } from "react";
 import { FavouriteButton } from "./add-favourite-button";
+import { getFavourites } from "@/actions/favourites";
 
 const DetailsPage = async ({
   params,
@@ -9,6 +10,9 @@ const DetailsPage = async ({
 }) => {
   const { id } = await params;
   const showData = await getShowDetails(parseInt(id as string));
+  const favourites = await getFavourites();
+
+  const isFavourite = !!favourites.find((f) => f.id === showData.id);
 
   return (
     <div>
@@ -49,7 +53,7 @@ const DetailsPage = async ({
         </ViewTransition>
       </div>
 
-      <FavouriteButton show={showData} />
+      <FavouriteButton show={showData} isFavourite={isFavourite} />
     </div>
   );
 };
