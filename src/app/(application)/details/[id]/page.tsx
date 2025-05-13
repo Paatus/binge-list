@@ -1,18 +1,35 @@
 import { getImageUrl, getShowDetails } from "@/tmbd-client";
-import { unstable_ViewTransition as ViewTransition } from "react";
+import {
+  cache,
+  Suspense,
+  unstable_ViewTransition as ViewTransition,
+} from "react";
 import { FavouriteButton } from "./add-favourite-button";
-import { getFavourites } from "@/actions/favourites";
+import { isFavourite } from "@/actions/favourites";
+import { TvShowDetails } from "@/app/types";
+import { Button } from "@/components/ui/button";
+import { LoaderCircle } from "lucide-react";
+
+const cachedShowDetails = cache(getShowDetails);
+
+const FavouriteButtonBoundary = async ({
+  show: showData,
+}: {
+  show: TvShowDetails;
+}) => {
+  const isFav = await isFavourite(showData.id);
+
+  return <FavouriteButton show={showData} isFavourite={isFav} />;
+};
 
 const DetailsPage = async ({
   params,
 }: {
   params: Promise<{ [key: string]: string | string[] | undefined }>;
 }) => {
-  const { id } = await params;
-  const showData = await getShowDetails(parseInt(id as string));
-  const favourites = await getFavourites();
-
-  const isFavourite = !!favourites.find((f) => f.id === showData.id);
+  const { id: idParam } = await params;
+  const id = parseInt(idParam as string);
+  const showData = await cachedShowDetails(id);
 
   return (
     <div>
@@ -53,7 +70,16 @@ const DetailsPage = async ({
         </ViewTransition>
       </div>
 
-      <FavouriteButton show={showData} isFavourite={isFavourite} />
+      <Suspense
+        fallback={
+          <Button disabled>
+            <LoaderCircle className="animate-spin" />
+            Loading
+          </Button>
+        }
+      >
+        <FavouriteButtonBoundary show={showData} />
+      </Suspense>
     </div>
   );
 };

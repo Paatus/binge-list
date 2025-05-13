@@ -69,11 +69,22 @@ const deleteFavourite = async ({
 export const getFavourites = async (): Promise<TvShowListing[]> => {
   const userId = await getUserId();
   if (!userId) return [];
-  const shows = db
+  const shows = await db
     .select({ id: favourites.showId })
     .from(favourites)
     .where(eq(favourites.userId, userId));
 
-  const promises = [...(await shows)].map((s) => getShowDetails(s.id));
+  const promises = shows.map((s) => getShowDetails(s.id));
   return await Promise.all(promises);
+};
+
+export const isFavourite = async (id: number): Promise<boolean> => {
+  const userId = await getUserId();
+  if (!userId) return false;
+  const shows = await db
+    .select({ id: favourites.showId })
+    .from(favourites)
+    .where(and(eq(favourites.userId, userId), eq(favourites.showId, id)));
+
+  return shows.length > 0;
 };
