@@ -7,7 +7,7 @@ import { getFavourites } from "@/actions/favourites";
 const Page = () => {
   return (
     <div className="h-full">
-      <div className="flex justify-between py-2">
+      <div className="flex justify-between">
         <h1 className="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">
           Favourites
         </h1>
@@ -18,7 +18,7 @@ const Page = () => {
           </Button>
         </Link>
       </div>
-      <div className="max-sm:w-full sm:flex-1 h-full ">
+      <div className="max-sm:w-full sm:flex-1 h-full mt-4">
         <FavouritesArea />
       </div>
     </div>

@@ -27,7 +27,7 @@ export function NavMain({
             <SidebarMenuButton
               tooltip={item.title}
               key={item.title}
-              className={item.isActive ? "text-blue-600" : ""}
+              className={`cursor-pointer ${item.isActive ? "text-blue-600" : ""}`}
             >
               {item.icon && <item.icon />}
               <span>{item.title}</span>
