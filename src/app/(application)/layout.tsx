@@ -8,10 +8,11 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { Breadcrumbs } from "@/components/breadcrumbs";
+// import { Breadcrumbs } from "@/components/breadcrumbs";
 import Providers from "@/components/providers";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import { ReactNode } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,9 +31,11 @@ export const metadata: Metadata = {
 
 const RootLayout = async ({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) => {
+  breadcrumbs,
+}: {
+  children: ReactNode;
+  breadcrumbs: ReactNode;
+}) => {
   const session = await auth();
 
   if (!session) {
@@ -56,7 +59,7 @@ const RootLayout = async ({
                       orientation="vertical"
                       className="mr-2 data-[orientation=vertical]:h-4"
                     />
-                    <Breadcrumbs />
+                    {breadcrumbs}
                   </div>
                 </header>
                 {children}

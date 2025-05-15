@@ -1,5 +1,6 @@
 "use client";
 
+import { TvShowDetails } from "@/app/types";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,14 +11,18 @@ import {
 import { usePathname } from "next/navigation";
 import { Fragment } from "react";
 
-const breadcrumbs = [
-  { title: "Home", matcher: /\//, href: "/" },
-  { title: "Find shows", matcher: /\/(find|details)/, href: "/find" },
-  { title: "Show details", matcher: /\/details/, href: "#" },
-];
+interface Props {
+  show?: TvShowDetails;
+}
 
-export const Breadcrumbs = () => {
+export const Breadcrumbs = ({ show }: Props) => {
   const pathname = usePathname();
+
+  const breadcrumbs = [
+    { title: "Home", matcher: /\//, href: "/" },
+    { title: "Find shows", matcher: /\/(find|details)/, href: "/find" },
+    { title: show?.name ?? "Show details", matcher: /\/details/, href: "#" },
+  ];
 
   const applicableBreadcrumbs = breadcrumbs.filter((b) =>
     pathname.match(b.matcher),
