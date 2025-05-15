@@ -59,6 +59,18 @@ export const searchShows = async (query: string) => {
   };
 };
 
+export const getStreamingServices = async (id: number) => {
+  const { data } = await tmdbClient.GET("/3/tv/{series_id}/watch/providers", {
+    params: { path: { series_id: id } },
+    headers: {
+      Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
+    },
+  });
+
+  // TODO Get language from a users preferences
+  return data?.results?.SE?.flatrate;
+};
+
 export const getShowDetails = async (id: number) => {
   const { data } = await tmdbClient.GET("/3/tv/{series_id}", {
     params: { path: { series_id: id } },
