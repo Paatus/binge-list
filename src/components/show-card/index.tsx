@@ -6,11 +6,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { TvShowListing } from "@/app/types";
+import { TvShowDetails, TvShowListing } from "@/app/types";
 import { FavouriteButton } from "./favourite-button";
 
 interface Props {
-  show: TvShowListing;
+  show: TvShowListing | TvShowDetails;
   isFavourite: boolean;
 }
 
@@ -19,15 +19,17 @@ export const ShowCard = ({ show, isFavourite }: Props) => {
     <Link href={`/details/${show.id}`} key={show.id}>
       <Card className="min-h-[132px]">
         <CardHeader>
-          <ViewTransition name={`title-${show.id}`}>
-            <CardTitle className="flex flex-row gap-4 items-center -mt-2">
-              <div className="grow line-clamp-1 ">{show.name}</div>
+          <CardTitle className="">
+            <div className="flex flex-row gap-4 items-center -mt-2">
+              <ViewTransition name={`title-${show.id}`}>
+                <div className="grow line-clamp-1 ">{show.name}</div>
+              </ViewTransition>
               <FavouriteButton show={show} isFavourite={isFavourite} />
-            </CardTitle>
-          </ViewTransition>
+            </div>
+          </CardTitle>
           <ViewTransition name={`overview-${show.id}`}>
             <CardDescription className="line-clamp-2">
-              {show.overview}
+              {show.overview ?? ("tagline" in show ? show.tagline : null)}
             </CardDescription>
           </ViewTransition>
         </CardHeader>
