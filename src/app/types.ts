@@ -20,6 +20,10 @@ export type TvShowDetails = Exclude<
   operations["tv-series-details"]["responses"][200]["content"]["application/json"],
   undefined
 >;
+export type Episode = Exclude<
+  operations["tv-season-details"]["responses"][200]["content"]["application/json"]["episodes"],
+  undefined
+>[number];
 
 export type ImageType = "backdrop" | "poster" | "profile" | "still";
 

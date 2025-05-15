@@ -2,9 +2,10 @@ import { getImageUrl } from "@/tmbd-client";
 import { cache, unstable_ViewTransition as ViewTransition } from "react";
 import { FavouriteButton } from "./add-favourite-button";
 import { isFavourite } from "@/actions/favourites";
-import { TvShowDetails } from "@/app/types";
+import { Episode, TvShowDetails } from "@/app/types";
 import { getShowDetails, getStreamingServices } from "@/actions/shows";
 import Image from "next/image";
+import { EpisodeItem } from "./episode";
 
 const cachedShowDetails = cache(getShowDetails);
 
@@ -161,6 +162,24 @@ const DetailsPage = async ({
                 </ViewTransition>
               </div>
             </div>
+
+            {show.last_episode_to_air ? (
+              <div className="pt-10">
+                <h2 className="text-base/7 font-semibold text-gray-900">
+                  Latest episode
+                </h2>
+                <EpisodeItem episode={show.last_episode_to_air} />
+              </div>
+            ) : null}
+
+            {show.next_episode_to_air ? (
+              <div className="pt-10">
+                <h2 className="text-base/7 font-semibold text-gray-900">
+                  Upcoming episode
+                </h2>
+                <EpisodeItem episode={show.next_episode_to_air as Episode} />
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
