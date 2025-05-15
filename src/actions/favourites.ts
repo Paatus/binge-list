@@ -1,6 +1,6 @@
 "use server";
 
-import { TvShowListing } from "@/app/types";
+import { TvShowDetails } from "@/app/types";
 import { auth } from "@/auth";
 import { favourites, users } from "@/schema";
 import { and, eq } from "drizzle-orm";
@@ -61,7 +61,7 @@ const deleteFavourite = async ({
     .where(and(eq(favourites.userId, userId), eq(favourites.showId, showId)));
 };
 
-export const getFavourites = async (): Promise<TvShowListing[]> => {
+export const getFavourites = async (): Promise<TvShowDetails[]> => {
   const userId = await getUserId();
   if (!userId) return [];
   const shows = await db
