@@ -9,7 +9,6 @@ import {
 import { TvShowDetails, TvShowListing } from "@/app/types";
 import { FavouriteButton } from "./favourite-button";
 import { getImageUrl } from "@/tmbd-client";
-import { getShowDetails } from "@/actions/shows";
 
 interface Props {
   show: TvShowListing | TvShowDetails;
