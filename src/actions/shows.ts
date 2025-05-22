@@ -52,10 +52,7 @@ export const searchShows = async (query: string) => {
 
   return {
     ...data,
-    results: data?.results
-      ?.filter(filterEmptyShows)
-      .sort(sortByPopularity)
-      .map(mapImages(config)),
+    results: data?.results?.filter(filterEmptyShows).sort(sortByPopularity),
   };
 };
 

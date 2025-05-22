@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Search, StarOff } from "lucide-react";
 import { getFavourites } from "@/actions/favourites";
+import { CardList } from "@/components/card-list";
 
 const Page = () => {
   return (
@@ -57,11 +58,11 @@ const FavouritesArea = async () => {
   }
 
   return (
-    <div className={`gap-2 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3`}>
+    <CardList>
       {favourites.map((favourite) => (
         <ShowCard show={favourite} isFavourite={true} key={favourite.id} />
       ))}
-    </div>
+    </CardList>
   );
 };
 

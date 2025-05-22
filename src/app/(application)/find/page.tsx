@@ -1,6 +1,7 @@
 import { getFavourites } from "@/actions/favourites";
 import { searchShows } from "@/actions/shows";
 import { TvShowListing } from "@/app/types";
+import { CardList } from "@/components/card-list";
 import { Header } from "@/components/header";
 import { ShowCard } from "@/components/show-card";
 import { ScanSearch } from "lucide-react";
@@ -33,7 +34,7 @@ const ResultsArea = async ({ shows, searchTerm }: ResultsAreaProps) => {
 
   const favourites = await getFavourites();
   return (
-    <div className={`gap-2 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3`}>
+    <CardList>
       {shows.map((show) => (
         <ShowCard
           show={show}
@@ -41,7 +42,7 @@ const ResultsArea = async ({ shows, searchTerm }: ResultsAreaProps) => {
           key={show.id}
         />
       ))}
-    </div>
+    </CardList>
   );
 };
 
