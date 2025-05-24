@@ -4,8 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Search, StarOff } from "lucide-react";
 import { getFavourites } from "@/actions/favourites";
 import { CardList } from "@/components/card-list";
+import { Filters } from "@/components/filters";
+import { ActiveFilters, Genre } from "../types";
 
-const Page = () => {
+const Page = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) => {
+  const p = await searchParams;
+  const selectedFilters: ActiveFilters = {
+    genre: typeof p.genre === "string" ? [p.genre] : p.genre || [],
+  };
   return (
     <div className="h-full">
       <div className="flex justify-between">
@@ -20,7 +30,7 @@ const Page = () => {
         </Link>
       </div>
       <div className="max-sm:w-full sm:flex-1 h-full mt-4">
-        <FavouritesArea />
+        <FavouritesArea selectedFilters={selectedFilters} />
       </div>
     </div>
   );
@@ -50,19 +60,56 @@ const EmptyState = () => {
   );
 };
 
-const FavouritesArea = async () => {
+function indexBy<T extends object>(list: T[], iteratee: keyof T) {
+  return list.reduce((map, obj) => {
+    const key = obj[iteratee];
+    // @ts-expect-error blablablabla
+    map[key] = obj;
+    return map;
+  }, {});
+}
+
+const FavouritesArea = async ({
+  selectedFilters,
+}: {
+  selectedFilters: ActiveFilters;
+}) => {
   const favourites = await getFavourites();
 
   if (!favourites.length) {
     <EmptyState />;
   }
+  const filtered = favourites.filter((f) => {
+    if (selectedFilters.genre.length === 0) {
+      return true;
+    }
+    return f.genres?.find((g) => selectedFilters.genre.includes(g.name || ""));
+  });
+
+  const genres: Genre[] = Object.values(
+    indexBy(
+      favourites.flatMap((f) => f.genres).filter((g) => !!g),
+      "id",
+    ),
+  );
+
+  const filteredAmount = filtered.length;
+  const favouritesAmount = favourites.length;
 
   return (
-    <CardList>
-      {favourites.map((favourite) => (
-        <ShowCard show={favourite} isFavourite={true} key={favourite.id} />
-      ))}
-    </CardList>
+    <>
+      <Filters
+        filters={{ genre: genres }}
+        activeFilters={selectedFilters}
+        numItems={favouritesAmount}
+        numHits={filteredAmount}
+      />
+      <CardList>
+        {filtered.map((favourite) => (
+          <ShowCard show={favourite} isFavourite={true} key={favourite.id} />
+        ))}
+      </CardList>
+    </>
   );
 };
 

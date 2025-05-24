@@ -24,6 +24,15 @@ export type Episode = Exclude<
   operations["tv-season-details"]["responses"][200]["content"]["application/json"]["episodes"],
   undefined
 >[number];
+export type Genre = Exclude<TvShowDetails["genres"], undefined>[number];
+
+export interface Filters {
+  genre: Genre[];
+}
+
+export type ActiveFilters = {
+  [K in keyof Filters]: string[];
+};
 
 export type ImageType = "backdrop" | "poster" | "profile" | "still";
 
