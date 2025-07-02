@@ -70,7 +70,11 @@ export const getFavourites = async (): Promise<TvShowDetails[]> => {
     .where(eq(favourites.userId, userId));
 
   const promises = shows.map((s) => getShowDetails(s.id));
-  return await Promise.all(promises);
+  const favouriteShows: TvShowDetails[] = await Promise.all(promises);
+
+  return favouriteShows.toSorted(
+    (a, b) => (a.name && b.name && a.name.localeCompare(b.name)) || -1,
+  );
 };
 
 export const isFavourite = async (id: number): Promise<boolean> => {
