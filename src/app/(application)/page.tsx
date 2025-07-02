@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Search, StarOff } from "lucide-react";
 import { getFavourites } from "@/actions/favourites";
 import { CardList } from "@/components/card-list";
+import { RecentEpisodesPopups } from "@/components/recent-episodes-popups";
 
 const Page = () => {
   return (
@@ -58,11 +59,14 @@ const FavouritesArea = async () => {
   }
 
   return (
-    <CardList>
-      {favourites.map((favourite) => (
-        <ShowCard show={favourite} isFavourite={true} key={favourite.id} />
-      ))}
-    </CardList>
+    <>
+      <CardList>
+        {favourites.map((favourite) => (
+          <ShowCard show={favourite} isFavourite={true} key={favourite.id} />
+        ))}
+      </CardList>
+      <RecentEpisodesPopups favourites={favourites} />
+    </>
   );
 };
 

@@ -8,11 +8,11 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-// import { Breadcrumbs } from "@/components/breadcrumbs";
 import Providers from "@/components/providers";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -67,6 +67,7 @@ const RootLayout = async ({
             </SidebarInset>
           </SidebarProvider>
         </Providers>
+        <Toaster />
       </body>
     </html>
   );
